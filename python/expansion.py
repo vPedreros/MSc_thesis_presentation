@@ -1,11 +1,17 @@
 from manim import *
 import numpy as np
 
+# Set global default colors for all text and math objects
+Text.set_default(color=BLACK)
+Tex.set_default(color=BLACK)
+MathTex.set_default(color=BLACK)
+
 class ExpandingUniverseIntro(Scene):
     def construct(self):
+        # self.camera.background_color = WHITE
         # --- Configuration ---
         L = 4.0  # Comoving size of the box
-        N_particles = 40
+        N_particles = 80
         np.random.seed(42)  # Ensures the random motion is exactly the same every render
         
         # --- Physical Setup ---
@@ -22,30 +28,30 @@ class ExpandingUniverseIntro(Scene):
 
         # --- Visual Elements ---
         # The bounding box
-        box = Square(side_length=L, color=WHITE)
+        box = Square(side_length=L, color=BLACK)
         
         # The particle group
         particles = VGroup()
         for i in range(N_particles):
-            if i == 0:
+            if i == 72:
                 # The Highlighted Particle (Anchor)
-                dot = Dot(color=YELLOW)
+                dot = Dot(color=RED_E)
             else:
                 # Background Particles
-                dot = Dot(color=BLUE)
+                dot = Dot(color=BLUE_E)
             particles.add(dot)
 
         self.add(box, particles)
 
         # --- The Physics Engine (Updater) ---
-        def update_universe(mob, dt):
+        def update_box(mob):
+            a = scale_factor_tracker.get_value()
+            mob.become(Square(side_length=L * a, color=BLACK))
+
+        def update_particles(mob, dt):
             a = scale_factor_tracker.get_value()
             
-            # 1. Expand the box
-            box.become(Square(side_length=L * a, color=WHITE))
-            
-            # 2. Update particle positions
-            for i, dot in enumerate(particles):
+            for i, dot in enumerate(mob):
                 # Kinematics: update comoving position
                 comoving_pos[i] += velocities[i] * dt
                 
@@ -58,8 +64,9 @@ class ExpandingUniverseIntro(Scene):
                 physical_pos = comoving_pos[i] * a
                 dot.move_to(physical_pos)
 
-        # Attach the updater to the scene
-        particles.add_updater(update_universe)
+        # Attach the updaters to the mobjects
+        box.add_updater(update_box)
+        particles.add_updater(update_particles)
 
         # --- Animation Timeline ---
         # Phase 1: Static universe (a=1) to demonstrate periodicity
@@ -68,7 +75,7 @@ class ExpandingUniverseIntro(Scene):
         # Phase 2: Cosmic expansion kicks in
         self.play(
             scale_factor_tracker.animate.set_value(1.7), 
-            run_time=6, 
+            run_time=15, 
             rate_func=linear
         )
         
