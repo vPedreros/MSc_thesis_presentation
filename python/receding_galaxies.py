@@ -139,7 +139,7 @@ class GalacticRecession(Scene):
         )
 
         distance_label = always_redraw(
-            lambda: MathTex(r"d(t) = a(t) \chi", font_size=36)
+            lambda: MathTex(r"d(t) = \chi a(t)", font_size=36)
             # Place it at the center of the arrow, then shift it up and left
             .move_to(distance_arrow.get_center() + DOWN * 0.4 + RIGHT * 0.8)
         )
