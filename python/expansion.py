@@ -8,10 +8,11 @@ MathTex.set_default(color=BLACK)
 
 class ExpandingUniverseIntro(Scene):
     def construct(self):
+        self.camera.background_color = WHITE
         # self.camera.background_color = WHITE
         # --- Configuration ---
-        L = 4.0  # Comoving size of the box
-        N_particles = 80
+        L = 4.6  # Comoving size of the box
+        N_particles = 120
         np.random.seed(42)  # Ensures the random motion is exactly the same every render
         
         # --- Physical Setup ---
