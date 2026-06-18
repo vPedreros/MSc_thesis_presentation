@@ -119,11 +119,3 @@ uv run manim -pqh python/GR_earth_rotating.py SpacetimeCurvature
 Los videos e imágenes resultantes se guardarán por defecto en el directorio `media/videos/` y `media/images/` respectivamente (este directorio está configurado en `.gitignore` para no subir archivos binarios pesados al repositorio de GitHub).
 
 ---
-
-## 🧑‍💻 Licencia y Créditos
-
-Este repositorio ha sido desarrollado como material complementario para la presentación de tesis de postgrado en el Departamento de Física de la Facultad de Ciencias Físicas y Matemáticas de la Universidad de Chile.
-
-* **Autor**: [Víctor Pedreros](https://github.com/vpedreros) (vpedreros)
-* **Institución**: Universidad de Chile
-* **Grupo de Investigación**: CosmoUChile
