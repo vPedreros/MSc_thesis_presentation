@@ -77,7 +77,7 @@ class GalacticRecessionComovingCoord(Scene):
             distance_arrow.get_center() + DOWN * 0.4 + RIGHT * 0.8
         )
 
-        metric_label = MathTex(r"\dd{s}^2 = a^2(t)\qty[-\dd{t}^2 + \dd{\vb x}^2]").to_edge(DOWN, buff=0.5)
+        # metric_label = MathTex(r"\dd{s}^2 = a^2(t)\qty[-\dd{t}^2 + \dd{\vb x}^2]").to_edge(DOWN, buff=0.5)
         
         # This is the ONLY object that needs an updater in comoving coordinates
         a_label = MathTex(f"a(t) = {a_initial/2:.2f}").to_edge(UP, buff=0.5)
@@ -97,7 +97,7 @@ class GalacticRecessionComovingCoord(Scene):
         self.play(FadeIn(distance_arrow), Write(distance_label))
         self.wait(1.5)
 
-        self.play(Write(metric_label), Write(a_label))
+        self.play(Write(a_label)) # Write(metric_label)
         self.wait(1)
 
         # Phase 5: The "Expansion"

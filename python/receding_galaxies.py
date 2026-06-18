@@ -41,6 +41,7 @@ def get_spiral_galaxy(color, radius=0.3):
 
 class GalacticRecession(Scene):
     def construct(self):
+        self.camera.background_color = WHITE
         # --- Configuration ---
         grid_dim = 6          # Number of comoving grid cells per dimension
         grid_scale = 1.0       # Size of each initial grid cell
@@ -118,7 +119,7 @@ class GalacticRecession(Scene):
 
         # We also need a dynamic label for the scale factor
         a_label = MathTex(f"a(t) = {a_initial/2:.2f}").to_edge(UP, buff=0.5)
-        metric_label = MathTex(r"\dd{s}^2 = a^2(t)\qty[-\dd{t}^2 + \dd{\vb x}^2]").to_edge(DOWN, buff=0.5)
+        # metric_label = MathTex(r"\dd{s}^2 = -\dd{t}^2 + a^2(t)\dd{\vb x}^2").to_edge(DOWN, buff=0.5)
         a_label.add_updater(
             lambda mob: mob.become(
                 MathTex(f"a(t) = {a_tracker.get_value()/2:.2f}").to_edge(UP, buff=0.5)
@@ -162,7 +163,7 @@ class GalacticRecession(Scene):
 
         # Phase 4: Introduce the Math
         # Right before the universe expands, we bring in the governing equations.
-        self.play(Write(metric_label), Write(a_label))
+        self.play(Write(a_label)) # Write(metric_label)
         self.wait(1)
 
         # Phase 5: The Expansion
